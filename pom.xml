@@ -11,10 +11,21 @@
 	<groupId>com.example</groupId>
 	<artifactId>todo-application</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>todo-application</name>
+	<name>TODO Application</name>
 	<description>TODO demo project for Spring Boot</description>
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>17</java.version>
+
+		<bootstrap.version>5.3.2</bootstrap.version>
+		<bootstrap-icons.version>1.11.1</bootstrap-icons.version>
+		<postgresql.version>42.6.0</postgresql.version>
+		<micrometer-registry-prometheus.version>1.11.3</micrometer-registry-prometheus.version>
+
+		<checkstyle.version>10.12.3</checkstyle.version>
+		<maven-checkstyle-plugin.version>3.3.0</maven-checkstyle-plugin.version>
+		<nohttp-checkstyle.version>0.0.11</nohttp-checkstyle.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -41,6 +52,15 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.micrometer</groupId>
+			<artifactId>micrometer-registry-prometheus</artifactId>
+			<version>${micrometer-registry-prometheus.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-undertow</artifactId>
 		</dependency>
 		<dependency>
@@ -63,18 +83,18 @@
 		<dependency>
 			<groupId>org.webjars</groupId>
 			<artifactId>bootstrap</artifactId>
-			<version>5.3.2</version>
+			<version>${bootstrap.version}</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.webjars.npm/bootstrap-icons -->
 		<dependency>
 			<groupId>org.webjars.npm</groupId>
 			<artifactId>bootstrap-icons</artifactId>
-			<version>1.11.1</version>
+			<version>${bootstrap-icons.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
-			<version>42.6.0</version>
+			<version>${postgresql.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -117,6 +137,58 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+							<goal>build-info</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>${maven-checkstyle-plugin.version}</version>
+				<dependencies>
+					<dependency>
+						<groupId>com.puppycrawl.tools</groupId>
+						<artifactId>checkstyle</artifactId>
+						<version>${checkstyle.version}</version>
+					</dependency>
+					<dependency>
+						<groupId>io.spring.nohttp</groupId>
+						<artifactId>nohttp-checkstyle</artifactId>
+						<version>${nohttp-checkstyle.version}</version>
+					</dependency>
+				</dependencies>
+				<configuration>
+					<configLocation>checkstyle.xml</configLocation>
+					<includes>pom.xml,README.md</includes>
+					<excludes>.git/**/*,target/**/*,node_modules/**/*,node/**/*</excludes>
+					<sourceDirectories>./</sourceDirectories>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>${maven-resources-plugin.version}</version>
+				<configuration>
+					<delimiters>
+						<delimiter>@</delimiter>
+					</delimiters>
+					<useDefaultDelimiters>false</useDefaultDelimiters>
+					<nonFilteredFileExtensions>
+						<nonFilteredFileExtension>jks</nonFilteredFileExtension>
+					</nonFilteredFileExtensions>
 				</configuration>
 			</plugin>
 		</plugins>
