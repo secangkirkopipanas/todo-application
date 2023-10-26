@@ -17,10 +17,15 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>17</java.version>
+
 		<bootstrap.version>5.3.2</bootstrap.version>
 		<bootstrap-icons.version>1.11.1</bootstrap-icons.version>
 		<postgresql.version>42.6.0</postgresql.version>
 		<micrometer-registry-prometheus.version>1.11.3</micrometer-registry-prometheus.version>
+
+		<checkstyle.version>10.12.3</checkstyle.version>
+		<maven-checkstyle-plugin.version>3.3.0</maven-checkstyle-plugin.version>
+		<nohttp-checkstyle.version>0.0.11</nohttp-checkstyle.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -138,6 +143,36 @@
 						<goals>
 							<goal>repackage</goal>
 							<goal>build-info</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>${maven-checkstyle-plugin.version}</version>
+				<dependencies>
+					<dependency>
+						<groupId>com.puppycrawl.tools</groupId>
+						<artifactId>checkstyle</artifactId>
+						<version>${checkstyle.version}</version>
+					</dependency>
+					<dependency>
+						<groupId>io.spring.nohttp</groupId>
+						<artifactId>nohttp-checkstyle</artifactId>
+						<version>${nohttp-checkstyle.version}</version>
+					</dependency>
+				</dependencies>
+				<configuration>
+					<configLocation>checkstyle.xml</configLocation>
+					<includes>pom.xml,README.md</includes>
+					<excludes>.git/**/*,target/**/*,node_modules/**/*,node/**/*</excludes>
+					<sourceDirectories>./</sourceDirectories>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>check</goal>
 						</goals>
 					</execution>
 				</executions>
