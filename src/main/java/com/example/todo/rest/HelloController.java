@@ -19,4 +19,9 @@ public class HelloController {
         return Map.of("message", "Hello, " + name + "!");
     }
 
+    @GetMapping("/millis")
+    public Map<String, Long> date() {
+        return Map.of("date", System.currentTimeMillis());
+    }
+
 }
