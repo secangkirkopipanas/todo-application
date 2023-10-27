@@ -4,7 +4,7 @@ services:
   app:
     image: quay.io/rh_rh/todo-application:0.0.1-SNAPSHOT
     environment:
-      - _JAVA_OPTIONS=-Xmx1024m -Xms512m
+      - _JAVA_OPTIONS=-Xmx1024m -Xms1024m
       - SPRING_PROFILES_ACTIVE=dev
       - DATASOURCE_URL=jdbc:postgresql://postgresql:5432/todo
       - DATASOURCE_USERNAME=postgres
