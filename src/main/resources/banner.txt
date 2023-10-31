@@ -6,7 +6,7 @@ ${AnsiStyle.BOLD}${AnsiColor.BRIGHT_BLUE}
  |_| \_\___|\__,_| |_| |_|\__,_|\__|
 
 ${AnsiColor.BRIGHT_WHITE}${app.title}${AnsiStyle.NORMAL} v${app.version}${AnsiColor.DEFAULT}
---------------------------------------------------------
+----------------------------------------------------------
  Powered by:
  * Spring Boot v${spring-boot.version} with Undertow
---------------------------------------------------------
+----------------------------------------------------------
