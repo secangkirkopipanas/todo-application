@@ -5,7 +5,7 @@
 This is an ENTIRE application for Java Spring Boot built using:
 - Spring Boot 3.1.4
 - Spring Data JPA
-- H2 Database
+- H2 Database (embedded)
 - Thymeleaf
 
 **I walk through how to build this yourself on YouTube**: https://youtu.be/yqWtYKWWcpY

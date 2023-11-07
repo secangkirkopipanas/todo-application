@@ -18,6 +18,10 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>17</java.version>
 
+		<repackage.classifier>exec</repackage.classifier>
+		<maven.build.timestamp.format>dd-MMM-yyyy HH:mm:ss.SSS z</maven.build.timestamp.format>
+		<build.date>${maven.build.timestamp}</build.date>
+
 		<bootstrap.version>5.3.2</bootstrap.version>
 		<bootstrap-icons.version>1.11.1</bootstrap-icons.version>
 		<postgresql.version>42.6.0</postgresql.version>
@@ -26,6 +30,7 @@
 		<checkstyle.version>10.12.3</checkstyle.version>
 		<maven-checkstyle-plugin.version>3.3.0</maven-checkstyle-plugin.version>
 		<nohttp-checkstyle.version>0.0.11</nohttp-checkstyle.version>
+		<git-commit-id-plugin.version>4.9.10</git-commit-id-plugin.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -104,6 +109,15 @@
 	</dependencies>
 
 	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>**/*.*</include>
+				</includes>
+			</resource>
+		</resources>
 		<plugins>
 			<plugin>
 				<groupId>org.hibernate.orm.tooling</groupId>
@@ -189,6 +203,17 @@
 					<nonFilteredFileExtensions>
 						<nonFilteredFileExtension>jks</nonFilteredFileExtension>
 					</nonFilteredFileExtensions>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>pl.project13.maven</groupId>
+				<artifactId>git-commit-id-plugin</artifactId>
+				<version>${git-commit-id-plugin.version}</version>
+				<configuration>
+					<excludeProperties>
+						<excludeProperty>^git.local.branch.*$</excludeProperty>
+						<generateGitPropertiesFile>true</generateGitPropertiesFile>
+					</excludeProperties>
 				</configuration>
 			</plugin>
 		</plugins>
