@@ -1,0 +1,20 @@
+h1 {
+    font-family: Futura, Tahoma;
+    margin: 20px 0;
+    font-weight: bold;
+}
+
+h3 {
+    font-family: Futura, Tahoma;
+    margin: 14px 0;
+}
+
+.green-theme {
+    background-color: greenyellow;
+    height: 10px;
+}
+
+.blue-theme {
+    background-color: dodgerblue;
+    height: 10px;
+}

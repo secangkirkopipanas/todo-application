@@ -2,15 +2,14 @@
 # This Dockerfile is used in order to build a container that runs the Spring Boot application
 #
 ###
-FROM registry.access.redhat.com/ubi9/openjdk-17:1.16 as JAR_EXTRACT
+FROM registry.access.redhat.com/ubi9/openjdk-21:1.18-3 as JAR_EXTRACT
 WORKDIR /app
 ARG JAR_FILE=*.jar
 COPY target/${JAR_FILE} ./app.jar
 RUN java -Djarmode=layertools -jar ./app.jar extract
 
-
 ####
-FROM registry.access.redhat.com/ubi9/openjdk-17:1.16
+FROM registry.access.redhat.com/ubi9/openjdk-21:1.18-3
 ARG APP_NAME=todo-application
 ARG APP_VERSION=0.0.1-SNAPSHOT
 ARG GIT_COMMIT_SHA
@@ -32,8 +31,8 @@ COPY --from=JAR_EXTRACT /app/spring-boot-loader ./
 COPY --from=JAR_EXTRACT /app/snapshot-dependencies ./
 COPY --from=JAR_EXTRACT /app/application ./
 
-# Exposing port 8181
-EXPOSE 8181
+# Exposing port 8080
+EXPOSE 8080
 
 # Entrypoint
-ENTRYPOINT ["java", "-XX:+UnlockExperimentalVMOptions", "-Djava.security.egd=file:/dev/./urandom", "org.springframework.boot.loader.JarLauncher"]
+ENTRYPOINT ["java", "-XX:+UnlockExperimentalVMOptions", "-Djava.security.egd=file:/dev/./urandom", "org.springframework.boot.loader.launch.JarLauncher"]
