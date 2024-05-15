@@ -10,11 +10,21 @@ h3 {
 }
 
 .green-theme {
-    background-color: greenyellow;
+    background-color: limegreen;
     height: 10px;
 }
 
 .blue-theme {
     background-color: dodgerblue;
+    height: 10px;
+}
+
+.red-theme {
+    background-color: red;
+    height: 10px;
+}
+
+.orange-theme {
+    background-color: darkorange;
     height: 10px;
 }
