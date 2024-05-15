@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-todo-java
+  labels:
+    app: todo-java
+spec:
+  selector:
+    app: todo-java
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+      name: http-port

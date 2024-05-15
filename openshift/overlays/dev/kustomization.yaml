@@ -1,0 +1,14 @@
+namespace: todo-java-dev
+resources:
+  - ../../base/
+
+patches:
+  - path: deployment-todo-java.yaml
+  - path: route-todo-java.yaml
+
+configMapGenerator:
+  - name: cm-todo-java
+    literals:
+      - java-tool-options="-server -Xms1024m -Xmx1024m"
+      - spring-profiles-active="dev"
+      - theme="blue-theme"

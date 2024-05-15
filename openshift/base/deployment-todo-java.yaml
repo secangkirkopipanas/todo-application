@@ -1,0 +1,69 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: todo-java
+  name: deployment-todo-java
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo-java
+  template:
+    metadata:
+      labels:
+        app: todo-java
+    spec:
+      containers:
+        - image: quay.io/rh_rh/todo-java:latest
+          name: todo-java
+          resources:
+            requests:
+              cpu: 100m
+              memory: 250Mi
+            limits:
+              cpu: 1000m
+              memory: 1.2Gi
+          imagePullPolicy: Always
+          env:
+            - name: JAVA_TOOL_OPTIONS
+              valueFrom:
+                configMapKeyRef:
+                  name: cm-todo-java
+                  key: java-tool-options
+            - name: SPRING_PROFILES_ACTIVE
+              valueFrom:
+                configMapKeyRef:
+                  name: cm-todo-java
+                  key: spring-profiles-active
+            - name: THEME
+              valueFrom:
+                configMapKeyRef:
+                  name: cm-todo-java
+                  key: theme
+          livenessProbe:
+            failureThreshold: 5
+            successThreshold: 1
+            initialDelaySeconds: 15
+            httpGet:
+              path: /management/health/liveness
+              port: 8080
+              scheme: HTTP
+          readinessProbe:
+            failureThreshold: 5
+            successThreshold: 1
+            initialDelaySeconds: 15
+            httpGet:
+              path: /management/health/readiness
+              port: 8080
+              scheme: HTTP
+          startupProbe:
+            failureThreshold: 5
+            successThreshold: 1
+            initialDelaySeconds: 15
+            httpGet:
+              path: /management/health
+              port: 8080
+              scheme: HTTP
+          securityContext:
+            runAsNonRoot: true
