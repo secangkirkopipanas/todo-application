@@ -22,6 +22,7 @@
 		<maven.build.timestamp.format>dd-MMM-yyyy HH:mm:ss.SSS z</maven.build.timestamp.format>
 		<build.date>${maven.build.timestamp}</build.date>
 
+		<h2.version>2.2.224</h2.version>
 		<bootstrap.version>5.3.2</bootstrap.version>
 		<bootstrap-icons.version>1.11.1</bootstrap-icons.version>
 		<postgresql.version>42.6.0</postgresql.version>
@@ -77,7 +78,7 @@
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
+			<version>${h2.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
