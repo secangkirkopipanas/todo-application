@@ -5,5 +5,10 @@ IMAGE_PATH=rh_rh
 APP_NAME=todo-java
 APP_IMAGE_TAG=latest
 
-docker build -t quay.io/${IMAGE_PATH}/${APP_NAME}:${APP_IMAGE_TAG} --platform linux/amd64 -f src/container/Containerfile .
-docker push quay.io/${IMAGE_PATH}/${APP_NAME}:${APP_IMAGE_TAG}
+PLATFORM=linux/amd64
+
+# Build container image
+docker build -t ${IMAGE_REGISTRY}/${IMAGE_PATH}/${APP_NAME}:${APP_IMAGE_TAG} --platform ${PLATFORM} -f src/container/Containerfile .
+
+# Push container image to registry
+docker push ${IMAGE_REGISTRY}/${IMAGE_PATH}/${APP_NAME}:${APP_IMAGE_TAG}
