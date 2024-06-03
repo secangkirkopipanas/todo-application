@@ -1,3 +1,0 @@
-resources:
-  - deployment-todo-java.yaml
-  - service-todo-java.yaml

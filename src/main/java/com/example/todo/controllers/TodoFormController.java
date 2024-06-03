@@ -13,7 +13,7 @@ import org.springframework.validation.BindingResult;
 @Controller
 public class TodoFormController {
 
-    @Value("${app.developer}")
+    @Value("${app.developer.name}")
     private String appDeveloper;
 
     @Value("${app.developer.email}")
