@@ -8,13 +8,49 @@ This is an ENTIRE application for Java Spring Boot built using:
 - H2 Database (embedded) / PostgreSQL
 - Thymeleaf
 
-## Development Instructions
+## Development instructions
 
-- `git clone https://github.com/secangkirkopipanas/todo-application.git`
-- `cd todo-application`
-- open in favorite editor, or
-- `mvnw spring-boot:run`
-- open http://localhost:8080 and TODO away!
+- Clone the source code from Git repository
+  ```
+  git clone https://github.com/secangkirkopipanas/todo-application.git
+  ```
+  
+- Change directory to the application directory
+  ```
+  cd todo-application
+  ```
+
+- Build the application
+  ```
+  ./mvnw clean package
+  ```
+  
+- Run the application
+  ```
+  mvnw spring-boot:run
+  ```
+  
+- Open the application from Internet broser with this URL:
+  ```
+  http://localhost:8080
+  ```
+
+## Environment Variables
+
+
+| **Enviroment variables**     | **Description**                     | **Default value**            |
+|------------------------------|-------------------------------------|------------------------------|
+| APP_PORT                     | Application port                    | 8080                         |
+| SPRING_ACTIVE_PROFILES       | Active profiles                     | dev                          |
+| MANAGEMENT_BASE_URL          | Management base URL                 | /management                  |
+| DATASOURCE_DRIVER_CLASSNAME  | Driver classname of the datasource  | [dev] org.h2.Driver          |
+|                              |                                     | [sit] org.postgresql.Driver  |
+|                              |                                     | [prod] org.postgresql.Driver | 
+| DATASOURCE_URL               | URL of the datasource               |                              |
+| DATASOURCE_USERNAME          | Username of the datasource          |                              |
+| DATASOURCE_PASSWORD          | Password of the datasource          |                              |
+| JPA_DIALECT                  | JPA dialect                         |                              |
+| H2_CONSOLE_ENABLED           | H2 console flag                     |                              |
 
 ## Original project
 
