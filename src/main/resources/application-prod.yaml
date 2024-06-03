@@ -1,0 +1,28 @@
+# setup database config
+spring:
+  datasource:
+    driver-class-name: ${DATASOURCE_DRIVER_CLASSNAME:org.postgresql.Driver}
+    url: ${DATASOURCE_URL:jdbc:postgresql://todo-java-db-svc:5432/todo-java-prod-db}
+    username: ${DATASOURCE_USERNAME:}
+    password: ${DATASOURCE_PASSWORD:}
+  jpa:
+    database-platform: ${JPA_DIALECT:org.hibernate.dialect.PostgreSQLDialect}
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+
+  # setup local h2 database console
+  h2:
+    console:
+      enabled: ${H2_CONSOLE_ENABLED:false}
+      path: /h2-console
+      settings:
+        web-allow-others: false
+
+  thymeleaf:
+    cache: false
+
+  logging:
+    level:
+      root: INFO
+      com.example.todo: INFO

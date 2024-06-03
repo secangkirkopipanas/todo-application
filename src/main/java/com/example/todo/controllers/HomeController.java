@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Log4j2
 public class HomeController {
 
-    @Value("${app.developer}")
+    @Value("${app.developer.name}")
     private String appDeveloper;
 
     @Value("${app.developer.email}")
