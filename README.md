@@ -37,18 +37,22 @@ This is an ENTIRE application for Java Spring Boot built using:
 
 ## Environment Variables
 
+### Common variables
+| **Enviroment variables**     | **Description**                     | **Default value**                                                                                                      |
+|------------------------------|-------------------------------------|------------------------------------------------------------------------------------------------------------------------|
+| APP_PORT                     | Application port                    | 8080                                                                                                                   |
+| SPRING_ACTIVE_PROFILES       | Active profiles                     | dev                                                                                                                    |
+| MANAGEMENT_BASE_URL          | Management base URL                 | /management                                                                                                            |
 
-| **Enviroment variables**     | **Description**                     | **Default value**                                                                                    |
-|------------------------------|-------------------------------------|------------------------------------------------------------------------------------------------------|
-| APP_PORT                     | Application port                    | 8080                                                                                                 |
-| SPRING_ACTIVE_PROFILES       | Active profiles                     | dev                                                                                                  |
-| MANAGEMENT_BASE_URL          | Management base URL                 | /management                                                                                          |
-| DATASOURCE_DRIVER_CLASSNAME  | Driver classname of the datasource  | **[dev]** org.h2.Driver <br/> **[sit]** org.postgresql.Driver <br/> **[prod]** org.postgresql.Driver | 
-| DATASOURCE_URL               | URL of the datasource               |                                                                                                      |
-| DATASOURCE_USERNAME          | Username of the datasource          |                                                                                                      |
-| DATASOURCE_PASSWORD          | Password of the datasource          |                                                                                                      |
-| JPA_DIALECT                  | JPA dialect                         |                                                                                                      |
-| H2_CONSOLE_ENABLED           | H2 console flag                     |                                                                                                      |
+### Profile-specific variables
+| **Enviroment variables**     | **Description**                     | **Default value**                                                                                                                                                                |
+|------------------------------|-------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| DATASOURCE_DRIVER_CLASSNAME  | Driver classname of the datasource  | **[dev]** org.h2.Driver <br/> **[sit]** org.postgresql.Driver <br/> **[prod]** org.postgresql.Driver                                                                             | 
+| DATASOURCE_URL               | URL of the datasource               | **[dev]** jdbc:h2:mem:todo <br/> **[sit]** jdbc:postgresql://todo-java-db-svc:5432/todo-java-sit-db <br/> **[prod]** jdbc:postgresql://todo-java-db-svc:5432/todo-java-prod-db   |
+| DATASOURCE_USERNAME          | Username of the datasource          | **[dev]** admin <br/> **[sit]** <empty> <br/> **[prod]** <empty>                                                                                                                 |
+| DATASOURCE_PASSWORD          | Password of the datasource          | **[dev]** password <br/> **[sit]** <empty> <br/> **[prod]** <empty>                                                                                                              |
+| JPA_DIALECT                  | JPA dialect                         | **[dev]** org.hibernate.dialect.H2Dialect <br/> **[sit]** org.hibernate.dialect.PostgreSQLDialect <br/> **[prod]** org.hibernate.dialect.PostgreSQLDialect                       |
+| H2_CONSOLE_ENABLED           | H2 console flag                     | **[dev]** true <br/> **[sit]** false <br/> **[prod]** false                                                                                                                      |
 
 ## Original project
 
