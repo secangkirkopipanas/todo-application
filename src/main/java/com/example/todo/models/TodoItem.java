@@ -2,6 +2,7 @@ package com.example.todo.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,11 +22,14 @@ public class TodoItem implements Serializable {
     @NotBlank(message = "Description is required")
     private String description;
 
-    private Boolean isComplete;
+    @NotNull
+    private Boolean isComplete = Boolean.FALSE;
 
-    private Instant createdAt;
+    @NotNull
+    private Long createdAt;
 
-    private Instant updatedAt;
+    @NotNull
+    private Long updatedAt;
 
     @Override
     public String toString() {

@@ -21,15 +21,17 @@ spring:
         web-allow-others: false
 
   # additional config for producer/consumer
-#  kafka:
-#    security:
-#      protocol: "SSL"
-#      bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
-#      ssl:
-#        trust-store-location: classpath:/certs/kafka.client.truststore.jks
-#        trust-store-password: password
-#        key-store-location:  classpath:/client-certs/kafka.client.keystore.jks
-#        key-store-password: <password>
+  kafka:
+    security:
+      protocol: "PLAINTEXT"
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    consumer:
+      group-id: group1
+#    ssl:
+#      trust-store-location: classpath:/certs/kafka.client.truststore.jks
+#      trust-store-password: password
+#      key-store-location:  classpath:/client-certs/kafka.client.keystore.jks
+#      key-store-password: <password>
 
   thymeleaf:
     cache: false
