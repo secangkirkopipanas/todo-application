@@ -1,8 +1,5 @@
 # Application properties
 app:
-  title: @pom.name@
-  version: @pom.version@
-  description: @pom.description@
   developer:
     name: Robertus Lilik Haryanto
     email: rharyant@redhat.com
@@ -12,9 +9,7 @@ server:
 
 spring:
   profiles:
-    active: ${SPRING_ACTIVE_PROFILES:dev}
-  kafka:
-    enabled: false
+    active: ${SPRING_ACTIVE_PROFILES:test}
 
 # Actuator
 management:
