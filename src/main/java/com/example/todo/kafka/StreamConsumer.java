@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class StreamConsumer {
 
-    @KafkaListener(topics = "todo", groupId = "group1")
-    void listener(String data) {
+    @KafkaListener(topics = "${app.kafka.todo.topic-name}", groupId = "${spring.kafka.consumer.group-id}")
+    void todoListener(String data) {
         log.info("Received message [{}] in group1", data);
     }
 }
