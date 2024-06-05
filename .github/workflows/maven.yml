@@ -23,6 +23,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+    - name: Preparing build environment
+        shell: bash
+        run: |
+          echo "sha_short=$(git rev-parse --short "$GITHUB_SHA")" >> "$GITHUB_ENV"
+          echo "branch=$(echo ${GITHUB_REF#refs/heads/})" >> "$GITHUB_ENV"
     - name: Set up JDK 21
       uses: actions/setup-java@v3
       with:
@@ -44,5 +49,5 @@ jobs:
         password: ${{ secrets.QUAY_TOKEN }}
     - name: Build the Docker image
       run: >
-        docker build . --file src/container/Containerfile --platform linux/amd64 --tag quay.io/rh_rh/todo-java:${{ steps.build_step.outputs.build_id }} && \
-        docker push quay.io/rh_rh/todo-java:${{ steps.build_step.outputs.build_id }}
+        docker build . --file src/container/Containerfile --platform linux/amd64 --tag quay.io/rh_rh/todo-java:${{ env.sha_short }} && \
+        docker push quay.io/rh_rh/todo-java:${{ env.sha_short }}
