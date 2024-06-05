@@ -41,13 +41,8 @@ jobs:
       with:
         name: Package
         path: staging
-    - name: Login to Quay.io
-      uses: docker/login-action@v3.2.0
-      with:
-        registry: quay.io
-        username: ${{ secrets.QUAY_USERNAME }}
-        password: ${{ secrets.QUAY_TOKEN }}
-    - name: Build the Docker image
+    - name: Build and push the Docker image
       run: |
+        docker login quay.io --username ${{ secrets.QUAY_USERNAME }} --password ${{ secrets.QUAY_TOKEN }}
         docker build . --file src/container/Containerfile --platform linux/amd64 --tag quay.io/rh_rh/todo-java:${{ env.sha_short }}
         docker push quay.io/rh_rh/todo-java:${{ env.sha_short }}
