@@ -38,7 +38,7 @@ spring:
   app:
     kafka:
       todo:
-        topic-name: todo
+        topic-name: ${APP_TODO_TOPIC:todo-prod}
 
   logging:
     level:
