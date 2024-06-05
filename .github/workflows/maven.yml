@@ -48,3 +48,5 @@ jobs:
         docker login quay.io --username ${{ secrets.QUAY_USERNAME }} --password ${{ secrets.QUAY_TOKEN }}
         docker build . --file src/container/Containerfile --platform linux/amd64 --tag quay.io/rh_rh/todo-java:${{ env.sha_short }}
         docker push quay.io/rh_rh/todo-java:${{ env.sha_short }}
+        docker image tag quay.io/rh_rh/todo-java:${{ env.sha_short }} quay.io/rh_rh/todo-java:latest
+        docker push quay.io/rh_rh/todo-java:latest
