@@ -35,6 +35,11 @@ spring:
   thymeleaf:
     cache: false
 
+  app:
+    kafka:
+      todo:
+        topic-name: ${APP_TODO_TOPIC:todo-prod}
+
   logging:
     level:
       root: INFO
