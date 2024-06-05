@@ -34,3 +34,5 @@ jobs:
       with:
         name: Package
         path: staging
+    - name: Build the Docker image
+      run: docker build . --file src/container/Containerfile --platform linux/amd64 --tag quay.io/rh_rh/todo-java:latest
