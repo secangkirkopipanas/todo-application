@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -26,10 +27,10 @@ public class TodoItem implements Serializable {
     private Boolean isComplete = Boolean.FALSE;
 
     @NotNull
-    private Long createdAt;
+    private LocalDateTime createdAt;
 
     @NotNull
-    private Long updatedAt;
+    private LocalDateTime updatedAt;
 
     @Override
     public String toString() {

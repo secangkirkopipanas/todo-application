@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -32,9 +33,9 @@ public class TodoItemService {
 
     public TodoItem save(TodoItem todoItem) {
         if (todoItem.getId() == null) {
-            todoItem.setCreatedAt(System.currentTimeMillis());
+            todoItem.setCreatedAt(LocalDateTime.now());
         }
-        todoItem.setUpdatedAt(System.currentTimeMillis());
+        todoItem.setUpdatedAt(LocalDateTime.now());
         todoItem = todoItemRepository.save(todoItem);
 
         // Send the object into Kafka topic
