@@ -10,7 +10,9 @@ name: Build with Maven
 
 on:
   push:
-    branches: [ "main", "develop" ]
+    # Sequence of patterns matched against refs/heads
+    branches-ignore:
+      - 'releases/**'
   pull_request:
     branches: [ "main" ]
 
