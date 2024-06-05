@@ -5,6 +5,7 @@ import com.example.todo.repositories.TodoItemRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
@@ -18,10 +19,13 @@ public class TodoItemService {
     private TodoItemRepository todoItemRepository;
 
     @Autowired
-    private KafkaTemplate<String, Object> kafkaTemplate;
+    private KafkaTemplate<String, String> kafkaTemplate;
 
     @Autowired
     private ObjectMapper jsonObjectMapper;
+
+    @Value("${app.kafka.todo.topic-name}")
+    private String topicName;
 
     public Optional<TodoItem> getById(Long id) {
         return todoItemRepository.findById(id);
@@ -40,7 +44,7 @@ public class TodoItemService {
 
         // Send the object into Kafka topic
         try {
-            kafkaTemplate.send("todo", jsonObjectMapper.writeValueAsString(todoItem));
+            kafkaTemplate.send(topicName, jsonObjectMapper.writeValueAsString(todoItem));
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }

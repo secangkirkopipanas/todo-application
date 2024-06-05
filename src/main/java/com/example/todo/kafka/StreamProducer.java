@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 public class StreamProducer {
 
     @Autowired
-    private KafkaTemplate<String, Object> kafkaTemplate;
+    private KafkaTemplate<String, String> kafkaTemplate;
 
     public void sendMessage(String message, String topicName) {
         log.info("Sending : {}", message);

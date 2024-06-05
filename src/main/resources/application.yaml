@@ -37,23 +37,23 @@ management:
     os:
       enabled: true
 
-    endpoint:
-      health:
-        enabled: true
-        showDetails: always
-        probes:
-          enabled: true
-
-      loggers:
+  endpoint:
+    health:
+      enabled: true
+      showDetails: always
+      probes:
         enabled: true
 
-    endpoints:
-      health:
-        sensitive: false
+    loggers:
+      enabled: true
 
-      web:
-        basePath: ${MANAGEMENT_BASE_URL:/management}
-        exposure:
-          include: info, health, prometheus, env, metrics, loggers
+  endpoints:
+    health:
+      sensitive: false
+
+    web:
+      basePath: ${MANAGEMENT_BASE_URL:/management}
+      exposure:
+        include: info, health, prometheus, env, metrics, loggers
 
 theme: ${THEME:blue-theme}
