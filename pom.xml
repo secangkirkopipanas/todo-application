@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.2.5</version>
+		<version>3.2.6</version>
 		<relativePath/>
 	</parent>
 	<groupId>com.example</groupId>
@@ -23,13 +23,13 @@
 		<build.date>${maven.build.timestamp}</build.date>
 
 		<h2.version>2.2.224</h2.version>
-		<bootstrap.version>5.3.2</bootstrap.version>
-		<bootstrap-icons.version>1.11.1</bootstrap-icons.version>
-		<postgresql.version>42.6.0</postgresql.version>
-		<micrometer-registry-prometheus.version>1.11.3</micrometer-registry-prometheus.version>
+		<bootstrap.version>5.3.3</bootstrap.version>
+		<bootstrap-icons.version>1.11.3</bootstrap-icons.version>
+		<postgresql.version>42.7.3</postgresql.version>
+		<micrometer-registry-prometheus.version>1.13.0</micrometer-registry-prometheus.version>
 
-		<checkstyle.version>10.12.3</checkstyle.version>
-		<maven-checkstyle-plugin.version>3.3.0</maven-checkstyle-plugin.version>
+		<checkstyle.version>10.17.0</checkstyle.version>
+		<maven-checkstyle-plugin.version>3.3.1</maven-checkstyle-plugin.version>
 		<nohttp-checkstyle.version>0.0.11</nohttp-checkstyle.version>
 		<git-commit-id-plugin.version>4.9.10</git-commit-id-plugin.version>
 	</properties>
