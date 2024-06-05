@@ -44,5 +44,5 @@ jobs:
         password: ${{ secrets.QUAY_TOKEN }}
     - name: Build the Docker image
       run: >
-        docker build . --file src/container/Containerfile --platform linux/amd64 --tag quay.io/rh_rh/todo-java:${{ steps.build_step.outputs.build_id }} \
+        docker build . --file src/container/Containerfile --platform linux/amd64 --tag quay.io/rh_rh/todo-java:${{ steps.build_step.outputs.build_id }} && \
         docker push quay.io/rh_rh/todo-java:${{ steps.build_step.outputs.build_id }}
