@@ -40,7 +40,7 @@ app:
     todo:
       topic-name: ${APP_TODO_TOPIC:todo-sit}
 
-  logging:
-    level:
-      root: INFO
-      com.example.todo: INFO
+logging:
+  level:
+    root: INFO
+    com.example.todo: INFO
