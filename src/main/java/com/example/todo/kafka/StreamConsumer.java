@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 public class StreamConsumer {
 
     @KafkaListener(topics = "${app.kafka.todo.topic-name}", groupId = "${spring.kafka.consumer.group-id}")
-    void listener(String data) {
+    void todoListener(String data) {
         log.info("Received message [{}] in group1", data);
     }
 }

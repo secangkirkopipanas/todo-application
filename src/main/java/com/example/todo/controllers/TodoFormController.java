@@ -77,7 +77,6 @@ public class TodoFormController {
         item.setDescription(todoItem.getDescription());
 
         todoItemService.save(item);
-
         return "redirect:/";
     }
 }
