@@ -17,11 +17,15 @@ on:
   pull_request:
     branches: [ "main" ]
 
+env:
+  image_registry: quay.io
+  image_registry_path: rh_rh/todo-java
+
 # Jobs to be run
 jobs:
 
   # 1. Build the artifact with Maven
-  build-maven:
+  build-push:
 
     runs-on: ubuntu-latest
     outputs:
@@ -50,22 +54,13 @@ jobs:
       with:
         name: Package
         path: staging
-
-  # 2. Build the container images with Docker
-  build-container:
-
-    runs-on: ubuntu-latest
-    needs: [ "build-maven" ]
-    outputs:
-      image_sha: ${{ env.image_sha }}
-
-    steps:
+        retention-days: 1
     - name: Build and push the Docker image
       run: |
-        TAG_NAME=${{ needs.build-maven.outputs.sha_short }}-${{ github.run_number }}
-        docker login quay.io --username ${{ secrets.QUAY_USERNAME }} --password ${{ secrets.QUAY_TOKEN }}
-        docker build . --file src/container/Containerfile --platform linux/amd64 --tag quay.io/rh_rh/todo-java:$TAG_NAME
-        docker push quay.io/rh_rh/todo-java:$TAG_NAME
-        docker image tag quay.io/rh_rh/todo-java:$TAG_NAME quay.io/rh_rh/todo-java:latest
-        docker push quay.io/rh_rh/todo-java:latest
-        echo "image_sha=$(docker images --no-trunc --quiet quay.io/rh_rh/todo-java:latest)" >> "$GITHUB_ENV"
+        TAG_NAME=${{ env.sha_short }}-${{ github.run_number }}
+        docker login ${{ env.image_registry }} --username ${{ secrets.QUAY_USERNAME }} --password ${{ secrets.QUAY_TOKEN }}
+        docker build . --file src/container/Containerfile --platform linux/amd64 --tag ${{ env.image_registry }}/${{ env.image_registry_path }}:$TAG_NAME
+        docker push ${{ env.image_registry }}/${{ env.image_registry_path }}:$TAG_NAME
+        docker image tag ${{ env.image_registry }}/${{ env.image_registry_path }}:$TAG_NAME quay.io/rh_rh/todo-java:latest
+        docker push ${{ env.image_registry }}/${{ env.image_registry_path }}:latest
+        echo "image_sha=$(docker images --no-trunc --quiet ${{ env.image_registry }}/${{ env.image_registry_path }}:latest)" >> "$GITHUB_ENV"
