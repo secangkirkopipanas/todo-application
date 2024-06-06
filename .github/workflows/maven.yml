@@ -63,6 +63,11 @@ jobs:
         docker login ${{ env.image_registry }} --username ${{ secrets.QUAY_USERNAME }} --password ${{ secrets.QUAY_TOKEN }}
         docker build . --file src/container/Containerfile --platform linux/amd64 --tag ${{ env.image_registry }}/${{ env.image_registry_path }}:$TAG_NAME
         docker push ${{ env.image_registry }}/${{ env.image_registry_path }}:$TAG_NAME
-        docker image tag ${{ env.image_registry }}/${{ env.image_registry_path }}:$TAG_NAME quay.io/rh_rh/todo-java:latest
-        docker push ${{ env.image_registry }}/${{ env.image_registry_path }}:latest
-        echo "image_sha=$(docker images --no-trunc --quiet ${{ env.image_registry }}/${{ env.image_registry_path }}:latest)" >> "$GITHUB_ENV"
+        echo "image_sha=$(docker images --no-trunc --quiet ${{ env.image_registry }}/${{ env.image_registry_path }}:$TAG_NAME)" >> "$GITHUB_ENV"
+        
+        if [ "${{ env.branch }}" == "main" ]; then
+          docker image tag ${{ env.image_registry }}/${{ env.image_registry_path }}:$TAG_NAME quay.io/rh_rh/todo-java:latest
+          docker push ${{ env.image_registry }}/${{ env.image_registry_path }}:latest
+        fi
+        
+        cat $GITHUB_ENV
