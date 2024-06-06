@@ -6,8 +6,9 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Build with Maven
+name: Build pipeline
 
+# Trigegr the pipeline on?
 on:
   push:
     # Sequence of patterns matched against refs/heads
@@ -16,8 +17,11 @@ on:
   pull_request:
     branches: [ "main" ]
 
+# Jobs to be run
 jobs:
-  build:
+
+  # 1. Build the artifact with Maven
+  build-maven:
 
     runs-on: ubuntu-latest
     outputs:
@@ -43,6 +47,10 @@ jobs:
       with:
         name: Package
         path: staging
+
+  # 2. Build the container images with Docker
+  build-container:
+
     - name: Build and push the Docker image
       run: |
         docker login quay.io --username ${{ secrets.QUAY_USERNAME }} --password ${{ secrets.QUAY_TOKEN }}
