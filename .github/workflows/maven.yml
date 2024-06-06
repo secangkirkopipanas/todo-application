@@ -59,7 +59,7 @@ jobs:
         retention-days: 1
     - name: Build and push the Docker image
       run: |
-        TAG_NAME=${{ env.sha_short }}-${{ github.run_number }}
+        TAG_NAME=${{ env.sha_short }}-b${{ github.run_number }}
         docker login ${{ env.image_registry }} --username ${{ secrets.QUAY_USERNAME }} --password ${{ secrets.QUAY_TOKEN }}
         docker build . --file src/container/Containerfile --platform linux/amd64 --tag ${{ env.image_registry }}/${{ env.image_registry_path }}:$TAG_NAME
         docker push ${{ env.image_registry }}/${{ env.image_registry_path }}:$TAG_NAME
