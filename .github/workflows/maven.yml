@@ -23,7 +23,7 @@ jobs:
   # 1. Build the artifact with Maven
   build-maven:
 
-    runs-on: debian-latest
+    runs-on: ubuntu-latest
     outputs:
       build_id: ${{ steps.build_step.outputs.build_id }}
 
@@ -51,7 +51,7 @@ jobs:
   # 2. Build the container images with Docker
   build-container:
 
-    runs-on: debian-latest
+    runs-on: ubuntu-latest
 
     steps:
     - name: Build and push the Docker image
