@@ -23,7 +23,7 @@ jobs:
   # 1. Build the artifact with Maven
   build-maven:
 
-    runs-on: ubuntu-latest
+    runs-on: debian-latest
     outputs:
       build_id: ${{ steps.build_step.outputs.build_id }}
 
@@ -51,6 +51,9 @@ jobs:
   # 2. Build the container images with Docker
   build-container:
 
+    runs-on: debian-latest
+
+    steps:
     - name: Build and push the Docker image
       run: |
         docker login quay.io --username ${{ secrets.QUAY_USERNAME }} --password ${{ secrets.QUAY_TOKEN }}
