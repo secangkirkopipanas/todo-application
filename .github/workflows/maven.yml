@@ -29,7 +29,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-      name: Preparing build environment
+    - name: Preparing build environment
       shell: bash
       run: |
         echo "sha_short=$(git rev-parse --short "$GITHUB_SHA")" >> "$GITHUB_ENV"
@@ -51,8 +51,7 @@ jobs:
   # 2. Build the container images with Docker
   build-container:
 
-    - uses: actions/upload-artifact@v4
-      name: Build and push the Docker image
+    - name: Build and push the Docker image
       run: |
         docker login quay.io --username ${{ secrets.QUAY_USERNAME }} --password ${{ secrets.QUAY_TOKEN }}
         docker build . --file src/container/Containerfile --platform linux/amd64 --tag quay.io/rh_rh/todo-java:${{ env.sha_short }}
