@@ -52,6 +52,7 @@ jobs:
   build-container:
 
     runs-on: ubuntu-latest
+    needs: [ "build-maven" ]
 
     steps:
     - name: Build and push the Docker image
