@@ -2,17 +2,18 @@
 # This Dockerfile is used in order to build a container that runs the Spring Boot application
 #
 ###
-FROM registry.access.redhat.com/ubi9/openjdk-21:1.18-4 as JAR_EXTRACT
+FROM --platform=linux/amd64 registry.access.redhat.com/ubi9/openjdk-21:1.18-4 as JAR_EXTRACT
+USER root
 WORKDIR /app
 ARG JAR_FILE=*.jar
 COPY target/${JAR_FILE} ./app.jar
 RUN java -Djarmode=layertools -jar ./app.jar extract
 
 ####
-FROM registry.access.redhat.com/ubi9/openjdk-21:1.18-3
+FROM --platform=linux/amd64 registry.access.redhat.com/ubi9/openjdk-21:1.18-3
 ARG APP_NAME=todo-application
 ARG APP_VERSION=0.0.1-SNAPSHOT
-ARG GIT_COMMIT_SHA
+ARG GIT_COMMIT_SHA=
 ARG GIT_COMMIT_BRANCH=develop
 
 # Labels
@@ -21,6 +22,8 @@ LABEL app-name="$APP_NAME"
 LABEL app-version="$APP_VERSION"
 LABEL git-commit-sha="$GIT_COMMIT_SHA"
 LABEL git-commit-branch="$GIT_COMMIT_BRANCH"
+
+USER root
 
 # Working directory
 WORKDIR /application

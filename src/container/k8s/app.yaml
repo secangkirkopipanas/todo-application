@@ -1,0 +1,73 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: todo-svc
+  namespace: todo-app
+  labels:
+    app: todo
+    service: todo
+spec:
+  ports:
+    - port: 8080
+      name: http
+  selector:
+    app: todo
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo
+  namespace: todo-app
+  labels:
+    app: todo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/inject: "true"
+      labels:
+        app: todo
+    spec:
+      containers:
+        - name: todo
+          image: quay.io/rh_rh/todo-java:latest
+          imagePullPolicy: Always
+          env:
+            - name: _JAVA_OPTIONS
+              value: "-Xmx1024m -Xms1024m"
+            - name: JAVA_OPTS
+              value: "-Djgroups.tcp.address=NON_LOOPBACK -Djava.net.preferIPv4Stack=true"
+            - name: SPRING_PROFILES_ACTIVE
+              value: "dev"
+          ports:
+            - containerPort: 8080
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+            capabilities:
+              drop: [ "ALL" ]
+            seccompProfile:
+              type: RuntimeDefault
+---
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: todo-route
+  namespace: todo-app
+  annotations:
+    openshift.io/host.generated: 'true'
+spec:
+  to:
+    kind: Service
+    name: todo-svc
+    weight: 100
+  port:
+    targetPort: http
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None

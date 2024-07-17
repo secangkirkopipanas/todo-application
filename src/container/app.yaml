@@ -2,7 +2,7 @@
 name: todo
 services:
   app:
-    image: quay.io/rh_rh/todo-application:0.0.1-SNAPSHOT
+    image: quay.io/rh_rh/todo-java:latest
     environment:
       - _JAVA_OPTIONS=-Xmx1024m -Xms1024m
       - SPRING_PROFILES_ACTIVE=dev
