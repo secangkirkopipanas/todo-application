@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.2.6</version>
+		<version>3.3.1</version>
 		<relativePath/>
 	</parent>
 	<groupId>com.example</groupId>
@@ -22,11 +22,12 @@
 		<maven.build.timestamp.format>dd-MMM-yyyy HH:mm:ss.SSS z</maven.build.timestamp.format>
 		<build.date>${maven.build.timestamp}</build.date>
 
-		<h2.version>2.2.224</h2.version>
+		<hibernate.version>6.4.8.Final</hibernate.version>
+		<h2.version>2.3.230</h2.version>
 		<bootstrap.version>5.3.3</bootstrap.version>
 		<bootstrap-icons.version>1.11.3</bootstrap-icons.version>
 		<postgresql.version>42.7.3</postgresql.version>
-		<micrometer-registry-prometheus.version>1.13.0</micrometer-registry-prometheus.version>
+		<micrometer-registry-prometheus.version>1.13.2</micrometer-registry-prometheus.version>
 
 		<checkstyle.version>10.17.0</checkstyle.version>
 		<maven-checkstyle-plugin.version>3.3.1</maven-checkstyle-plugin.version>
