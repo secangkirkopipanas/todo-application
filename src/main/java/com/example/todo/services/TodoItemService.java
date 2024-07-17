@@ -6,10 +6,13 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Profile;
+import org.springframework.core.env.Environment;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.Optional;
 
 @Service
@@ -23,6 +26,9 @@ public class TodoItemService {
 
     @Autowired
     private ObjectMapper jsonObjectMapper;
+
+    @Autowired
+    private Environment environment;
 
     @Value("${app.kafka.todo.topic-name}")
     private String topicName;
@@ -42,13 +48,21 @@ public class TodoItemService {
         todoItem.setUpdatedAt(LocalDateTime.now());
         todoItem = todoItemRepository.save(todoItem);
 
+        if (Arrays.stream(environment.getActiveProfiles()).toList().contains("kafka")) {
+            sendToTopic(topicName, todoItem);
+        }
+
+        return todoItem;
+    }
+
+    @Profile("kafka")
+    public void sendToTopic(String topicName, TodoItem todoItem) {
         // Send the object into Kafka topic
         try {
             kafkaTemplate.send(topicName, jsonObjectMapper.writeValueAsString(todoItem));
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
-        return todoItem;
     }
 
     public void delete(TodoItem todoItem) {
