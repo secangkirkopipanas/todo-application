@@ -41,7 +41,7 @@ public class HelloController {
 
     @GetMapping("/millis")
     public Map<String, Long> date() {
-        Map<String, Long> result = Map.of("date", System.currentTimeMillis());
+        Map<String, Long> result = Map.of("millis", System.currentTimeMillis());
         try {
             log.info("Return: ", jsonObjectMapper.writeValueAsString(result));
         } catch (JsonProcessingException e) {
