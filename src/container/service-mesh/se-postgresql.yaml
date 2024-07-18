@@ -1,0 +1,11 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: ServiceEntry
+metadata:
+  name: se-postgresql
+spec:
+  hosts:
+  - postgresql
+  ports:
+  - name: tcp
+    number: 5432
+    protocol: tcp
