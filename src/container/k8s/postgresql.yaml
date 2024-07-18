@@ -8,8 +8,8 @@ metadata:
     service: postgresql
 spec:
   ports:
-    - port: 5432
-      name: tcp
+  - port: 5432
+    name: tcp
   selector:
     app: postgresql
 ---
@@ -33,28 +33,28 @@ spec:
         app: postgresql
     spec:
       containers:
-        - name: postgresql
-          image: registry.access.redhat.com/rhel8/postgresql-16:1-21
-          imagePullPolicy: IfNotPresent
-          env:
-            - name: POSTGRESQL_ADMIN_PASSWORD
-              value: "P4ssw0rd123"
-            - name: POSTGRESQL_USER
-              value: "todo-user"
-            - name: POSTGRESQL_PASSWORD
-              value: "password"
-            - name: POSTGRESQL_DATABASE
-              value: "todo"
-            - name: POSTGRES_HOST_AUTH_METHOD
-              value: "trust"
-            - name: POSTGRESQL_MAX_CONNECTIONS
-              value: "50"
-          ports:
-            - containerPort: 5432
-          securityContext:
-            allowPrivilegeEscalation: false
-            runAsNonRoot: true
-            capabilities:
-              drop: [ "ALL" ]
-            seccompProfile:
-              type: RuntimeDefault
+      - name: postgresql
+        image: registry.access.redhat.com/rhel8/postgresql-16:1-21
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: POSTGRESQL_ADMIN_PASSWORD
+          value: "P4ssw0rd123"
+        - name: POSTGRESQL_USER
+          value: "todo-user"
+        - name: POSTGRESQL_PASSWORD
+          value: "password"
+        - name: POSTGRESQL_DATABASE
+          value: "todo"
+        - name: POSTGRES_HOST_AUTH_METHOD
+          value: "trust"
+        - name: POSTGRESQL_MAX_CONNECTIONS
+          value: "50"
+        ports:
+        - containerPort: 5432
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          capabilities:
+            drop: [ "ALL" ]
+          seccompProfile:
+            type: RuntimeDefault

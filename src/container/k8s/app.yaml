@@ -1,15 +1,15 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: todo-svc
+  name: todo
   namespace: todo-app
   labels:
     app: todo
     service: todo
 spec:
   ports:
-    - port: 8080
-      name: http
+  - port: 8080
+    name: http
   selector:
     app: todo
 ---
@@ -33,25 +33,31 @@ spec:
         app: todo
     spec:
       containers:
-        - name: todo
-          image: quay.io/rh_rh/todo-java:latest
-          imagePullPolicy: Always
-          env:
-            - name: _JAVA_OPTIONS
-              value: "-Xmx1024m -Xms1024m"
-            - name: JAVA_OPTS
-              value: "-Djgroups.tcp.address=NON_LOOPBACK -Djava.net.preferIPv4Stack=true"
-            - name: SPRING_PROFILES_ACTIVE
-              value: "dev"
-          ports:
-            - containerPort: 8080
-          securityContext:
-            allowPrivilegeEscalation: false
-            runAsNonRoot: true
-            capabilities:
-              drop: [ "ALL" ]
-            seccompProfile:
-              type: RuntimeDefault
+      - name: todo
+        image: quay.io/rh_rh/todo-java:latest
+        imagePullPolicy: Always
+        env:
+        - name: _JAVA_OPTIONS
+          value: "-Xmx1024m -Xms1024m"
+        - name: JAVA_OPTS
+          value: "-Djgroups.tcp.address=NON_LOOPBACK -Djava.net.preferIPv4Stack=true"
+        - name: SPRING_PROFILES_ACTIVE
+          value: "sit"
+        - name: DATASOURCE_URL
+          value: "jdbc:postgresql://postgresql:5432/todo"
+        - name: DATASOURCE_USERNAME
+          value: "todo-user"
+        - name: DATASOURCE_PASSWORD
+          value: "password"
+        ports:
+        - containerPort: 8080
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          capabilities:
+            drop: [ "ALL" ]
+          seccompProfile:
+            type: RuntimeDefault
 ---
 kind: Route
 apiVersion: route.openshift.io/v1

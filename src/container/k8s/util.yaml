@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: util
+  name: util
+  namespace: todo-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: util
+  template:
+    metadata:
+      labels:
+        app: util
+    spec:
+      containers:
+        - image: quay.io/rh_rh/debian-util:latest
+          command: ["tail", "-f", "/dev/null"]
+          name: util
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+            capabilities:
+              drop: [ "ALL" ]
+            seccompProfile:
+              type: RuntimeDefault
