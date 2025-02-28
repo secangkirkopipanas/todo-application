@@ -1,3 +1,7 @@
+server:
+  servlet:
+    context-path: /
+
 # additional config for producer/consumer
 kafka:
   security:

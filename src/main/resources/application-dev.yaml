@@ -1,4 +1,7 @@
-# setup database config
+server:
+  servlet:
+    context-path: /
+
 spring:
   datasource:
     driver-class-name: ${DATASOURCE_DRIVER_CLASSNAME:org.h2.Driver}
