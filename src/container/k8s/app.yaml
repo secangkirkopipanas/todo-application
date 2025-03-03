@@ -28,7 +28,7 @@ spec:
   template:
     metadata:
       annotations:
-        sidecar.istio.io/inject: "true"
+        sidecar.istio.io/inject: "false"
       labels:
         app: todo
     spec:
@@ -50,7 +50,8 @@ spec:
         - name: DATASOURCE_PASSWORD
           value: "password"
         ports:
-        - containerPort: 8080
+        - name: http
+          containerPort: 8080
         securityContext:
           allowPrivilegeEscalation: false
           runAsNonRoot: true
@@ -69,7 +70,7 @@ metadata:
 spec:
   to:
     kind: Service
-    name: todo-svc
+    name: todo
     weight: 100
   port:
     targetPort: http
