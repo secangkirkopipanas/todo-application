@@ -15,7 +15,7 @@ pipeline {
         stage('Clone Repo') {
             steps {
                 // Manually specifies the repository URL and branch
-                git branch: 'main',
+                git branch: 'develop',
                         credentialsId: 'github-token', // Optional: ID of a stored credential (e.g., SSH key)
                         url: 'https://github.com/secangkirkopipanas/todo-application.git'
             }
