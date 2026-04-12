@@ -24,11 +24,11 @@
 		<build.date>${maven.build.timestamp}</build.date>
 
 		<hibernate.version>6.6.9.Final</hibernate.version>
-		<h2.version>2.3.232</h2.version>
-		<bootstrap.version>5.3.3</bootstrap.version>
-		<bootstrap-icons.version>1.11.3</bootstrap-icons.version>
+		<h2.version>2.4.240</h2.version>
+		<bootstrap.version>5.3.8</bootstrap.version>
+		<bootstrap-icons.version>1.13.1</bootstrap-icons.version>
 		<postgresql.version>42.7.5</postgresql.version>
-		<micrometer-registry-prometheus.version>1.14.4</micrometer-registry-prometheus.version>
+		<micrometer-registry-prometheus.version>1.16.4</micrometer-registry-prometheus.version>
 
 		<checkstyle.version>10.21.3</checkstyle.version>
 		<maven-checkstyle-plugin.version>3.6.0</maven-checkstyle-plugin.version>
